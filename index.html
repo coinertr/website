@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   
-  <!-- Temel SEO & Arama Motoru Ayarları (Orijinal Başlık Korundu) -->
+  <!-- Temel SEO & Arama Motoru Ayarları -->
   <title>Cengiz Aktaş | Broadcast Systems Executive</title>
   <meta name="description" content="Cengiz Aktaş - Broadcast Systems Executive. Yayın ve medya teknolojileri, otomasyon altyapıları, sistem entegrasyonu ve dijital medya yönetimi.">
   <meta name="author" content="Cengiz Aktaş">
@@ -277,12 +277,12 @@
       padding: 0 0.25rem;
     }
 
-    /* Geri Arama Formu */
+    /* Geri Arama & İletişim Formu */
     .callback-card {
       background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 16px;
-      padding: 1.15rem 1rem;
+      padding: 1.25rem 1rem;
       margin-bottom: 1.5rem;
       text-align: center;
     }
@@ -313,29 +313,37 @@
     .callback-form {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
 
-    .phone-input {
+    .form-control {
       width: 100%;
       padding: 0.8rem 1rem;
-      font-size: 1rem;
+      font-size: 0.95rem;
       background: rgba(10, 13, 22, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
       color: #ffffff;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      text-align: center;
-      letter-spacing: 0.04em;
+      font-family: inherit;
     }
 
-    .phone-input:focus {
+    .form-control:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
     }
 
-    .phone-input::placeholder {
+    .phone-input {
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .topic-input {
+      text-align: center;
+    }
+
+    .form-control::placeholder {
       color: var(--text-dim);
       font-size: 0.85rem;
     }
@@ -356,6 +364,7 @@
       gap: 0.5rem;
       transition: background 0.2s ease, transform 0.1s ease;
       -webkit-tap-highlight-color: transparent;
+      margin-top: 0.15rem;
     }
 
     .btn-submit:active {
@@ -516,7 +525,7 @@
       Yayın ve medya teknolojileri, otomasyon altyapıları, uçtan uca sistem entegrasyonu ve dijital medya yönetimi.
     </p>
 
-    <!-- Geri Arama Formu -->
+    <!-- Geri Arama & Serbest Konu Yazımlı Form -->
     <div class="callback-card">
       <div class="callback-title">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -524,23 +533,36 @@
         </svg>
         <span>Sizi Arayayım</span>
       </div>
-      <p class="callback-desc">Numaranızı bırakın, en kısa sürede dönüş yapayım.</p>
+      <p class="callback-desc">Numaranızı ve konuyu bırakın, en kısa sürede dönüş yapayım.</p>
       
       <form id="contactForm" class="callback-form">
         <input type="hidden" name="_subject" value="Yeni İletişim / Geri Arama Talebi - cengizaktas.com.tr">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="_honey" style="display:none">
 
+        <!-- 1. Telefon Numarası -->
         <input 
           type="tel" 
-          name="phone" 
+          name="Telefon" 
           id="phone" 
-          class="phone-input" 
+          class="form-control phone-input" 
           placeholder="05XX XXX XX XX" 
           required 
           autocomplete="tel" 
           inputmode="tel"
         >
+
+        <!-- 2. Görüşme Konusu (Kullanıcının Kendisi Yazar) -->
+        <input 
+          type="text" 
+          name="Görüşme_Konusu" 
+          id="topic" 
+          class="form-control topic-input" 
+          placeholder="Hangi konuda görüşmek istiyorsunuz?" 
+          required 
+          maxlength="150"
+        >
+
         <button type="submit" id="submitBtn" class="btn-submit">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
@@ -599,7 +621,7 @@
 
         if (response.ok) {
           formStatus.className = 'form-status success';
-          formStatus.textContent = 'Numaranız başarıyla iletildi. En kısa sürede dönüş yapacağım.';
+          formStatus.textContent = 'Bilgileriniz başarıyla iletildi. En kısa sürede dönüş yapacağım.';
           form.reset();
         } else {
           throw new Error();
